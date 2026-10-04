@@ -1,0 +1,8 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your FitBuddy plan</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><main class="shell"><header><a class="brand" href="/">✦ FitBuddy</a><a href="/view-all-users">Coach dashboard</a></header>
+<section class="result"><p class="eyebrow">YOUR WEEK, YOUR WAY</p><h1>Hello, {{ user.username }}.</h1><p class="intro">{{ user.goal|title }} · {{ user.intensity|title }} preferred intensity</p>
+{% if updated %}<p class="success">Your plan has been updated with your feedback.</p>{% endif %}
+<div class="panel"><h2>7-day activity plan</h2><pre>{{ workout_plan }}</pre></div>
+<div class="panel tip"><h2>Nutrition & recovery tip</h2><p>{{ nutrition_tip }}</p></div>
+<form class="panel" action="/submit-feedback" method="post"><h2>Refine your plan</h2><input type="hidden" name="user_id" value="{{ user.user_id }}"><label>What would you like to change?<textarea name="feedback" required minlength="3" maxlength="1000" placeholder="For example: include more stretching or make sessions gentler"></textarea></label><button type="submit">Update my plan ↗</button></form>
+<a class="back" href="/">← Create another plan</a></section></main></body></html>

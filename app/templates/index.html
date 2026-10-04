@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FitBuddy — Your fitness companion</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><main class="shell"><header><a class="brand" href="/">✦ FitBuddy</a><a href="/view-all-users">Coach dashboard</a></header>
+<section class="hero"><p class="eyebrow">MOVE WELL · FEEL GOOD</p><h1>Your plan.<br><span>Your pace.</span></h1>
+<p class="intro">Build a balanced 7-day activity plan shaped around your goals and preferences.</p>
+<form class="panel" action="/generate-workout" method="post">
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<div class="fields"><label>Name<input name="username" required maxlength="120" placeholder="Your name"></label>
+<label>User ID<input name="user_id" required maxlength="80" placeholder="Choose an ID"></label>
+<label>Age<input name="age" type="number" min="13" max="100" required></label>
+<label>Weight (kg)<input name="weight" type="number" min="1" max="500" step="0.1" required></label>
+<label>Fitness goal<select name="goal"><option>general wellness</option><option>strength</option><option>flexibility</option><option>cardiovascular fitness</option><option>muscle gain</option></select></label>
+<label>Preferred intensity<select name="intensity"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></label></div>
+<button type="submit">Generate my plan <span>↗</span></button><p class="note">Plans are general wellness guidance, not medical advice. Choose comfortable activities and ask a qualified professional if you have concerns.</p>
+</form></section><footer>Small steps, steady progress.</footer></main></body></html>
