@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitBuddy History</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2563eb;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .section h2 {
+            color: #2563eb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        .plan {
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+
+        .empty {
+            text-align: center;
+            color: #777;
+            padding: 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 18px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            background: #fafafa;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="/" class="back-button">
+        ← Back to Home
+    </a>
+
+    <h1>FitBuddy History</h1>
+
+
+    <!-- USERS HISTORY -->
+
+    <div class="section">
+
+        <h2>👤 Users History</h2>
+
+        {% if users %}
+
+        <table>
+
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Age</th>
+                <th>Weight</th>
+                <th>Goal</th>
+                <th>Intensity</th>
+                <th>Created</th>
+            </tr>
+
+            {% for user in users %}
+
+            <tr>
+
+                <td>{{ user.user_id }}</td>
+
+                <td>{{ user.username }}</td>
+
+                <td>{{ user.age }}</td>
+
+                <td>{{ user.weight }}</td>
+
+                <td>{{ user.goal }}</td>
+
+                <td>{{ user.intensity }}</td>
+
+                <td>{{ user.created_at }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+            No users found.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- GENERATED PLANS -->
+
+    <div class="section">
+
+        <h2>📋 Generated Plans History</h2>
+
+        {% if plans %}
+
+        <table>
+
+            <tr>
+                <th>User ID</th>
+                <th>Generated Workout Plan</th>
+                <th>Nutrition Tip</th>
+                <th>Date</th>
+            </tr>
+
+            {% for plan in plans %}
+
+            <tr>
+
+                <td>{{ plan.user_id }}</td>
+
+                <td class="plan">
+                    {{ plan.original_plan }}
+                </td>
+
+                <td class="plan">
+                    {{ plan.nutrition_tip }}
+                </td>
+
+                <td>{{ plan.created_at }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+            No generated plans found.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- UPDATED PLANS -->
+
+    <div class="section">
+
+        <h2>✏️ Updated Plans History</h2>
+
+        {% for plan in plans %}
+
+            {% if plan.updated_plan %}
+
+            <div class="card">
+
+                <p>
+                    <strong>User ID:</strong>
+                    {{ plan.user_id }}
+                </p>
+
+                <p>
+                    <strong>Date:</strong>
+                    {{ plan.created_at }}
+                </p>
+
+                <p>
+                    <strong>Updated Plan:</strong>
+                </p>
+
+                <div class="plan">
+                    {{ plan.updated_plan }}
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        {% else %}
+
+            <div class="empty">
+                No updated plans found.
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- FEEDBACK HISTORY -->
+
+    <div class="section">
+
+        <h2>💬 Feedback History</h2>
+
+        {% for plan in plans %}
+
+            {% if plan.feedback %}
+
+            <div class="card">
+
+                <p>
+                    <strong>User ID:</strong>
+                    {{ plan.user_id }}
+                </p>
+
+                <p>
+                    <strong>Date:</strong>
+                    {{ plan.created_at }}
+                </p>
+
+                <p>
+                    <strong>Feedback:</strong>
+                </p>
+
+                <div class="plan">
+                    {{ plan.feedback }}
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        {% else %}
+
+            <div class="empty">
+                No feedback found.
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
